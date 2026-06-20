@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="BankingApp.Desktop.Views.ProductFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="640" HorizontalAlignment="Left">
+
+            <!-- Title -->
+            <TextBlock x:Name="TxtFormTitle" Text="Добавяне на нов продукт"
+                       Style="{StaticResource SectionTitle}" />
+
+            <Border Background="{StaticResource PrimarySurfaceBrush}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="ОСНОВНА ИНФОРМАЦИЯ"
+                               FontSize="11" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBlueBrush}"
+                               Margin="0,0,0,16" />
+
+                    <!-- Type -->
+                    <TextBlock Text="Тип на продукта" Style="{StaticResource FormLabel}" />
+                    <ComboBox x:Name="CmbType" Style="{StaticResource AppComboBox}"
+                              Margin="0,0,0,12"
+                              SelectionChanged="CmbType_SelectionChanged">
+                        <ComboBoxItem Content="Deposit" IsSelected="True" />
+                        <ComboBoxItem Content="Loan" />
+                        <ComboBoxItem Content="Credit Card" />
+                        <ComboBoxItem Content="Checking Account" />
+                    </ComboBox>
+
+                    <!-- Name -->
+                    <TextBlock Text="Име на продукта *" Style="{StaticResource FormLabel}" />
+                    <TextBox x:Name="TxtName" Style="{StaticResource AppTextBox}"
+                             Margin="0,0,0,12" />
+
+                    <!-- Bank Name -->
+                    <TextBlock Text="Име на банката *" Style="{StaticResource FormLabel}" />
+                    <TextBox x:Name="TxtBankName" Style="{StaticResource AppTextBox}"
+                             Margin="0,0,0,12" />
+
+                    <!-- Description -->
+                    <TextBlock Text="Описание" Style="{StaticResource FormLabel}" />
+                    <TextBox x:Name="TxtDescription" Style="{StaticResource AppTextBox}"
+                             TextWrapping="Wrap" AcceptsReturn="True"
+                             Height="80" Margin="0,0,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border x:Name="DepositFields"
+                    Background="{StaticResource PrimarySurfaceBrush}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="ПАРАМЕТРИ НА ДЕПОЗИТА"
+                               FontSize="11" FontWeight="Bold"
+                               Foreground="{StaticResource AccentGoldBrush}"
+                               Margin="0,0,0,16" />
+
+                    <!-- Currency -->
+                    <TextBlock Text="Валута" Style="{StaticResource FormLabel}" />
+                    <ComboBox x:Name="CmbCurrency" Style="{StaticResource AppComboBox}"
+                              Margin="0,0,0,12">
+                        <ComboBoxItem Content="EUR" IsSelected="True" />
+                        <ComboBoxItem Content="USD" />
+                    </ComboBox>
+
+                    <!-- Two-column row: Term & Interest Rate -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Срок (месеци) *" Style="{StaticResource FormLabel}" />
+                            <TextBox x:Name="TxtTermMonths" Style="{StaticResource AppTextBox}" Text="12" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Лихвен процент (%) *" Style="{StaticResource FormLabel}" />
+                            <TextBox x:Name="TxtInterestRate" Style="{StaticResource AppTextBox}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Two-column row: Min & Max Amount -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Минимална сума *" Style="{StaticResource FormLabel}" />
+                            <TextBox x:Name="TxtMinAmount" Style="{StaticResource AppTextBox}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Максимална сума *" Style="{StaticResource FormLabel}" />
+                            <TextBox x:Name="TxtMaxAmount" Style="{StaticResource AppTextBox}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Interest Type -->
+                    <TextBlock Text="Тип на лихвата" Style="{StaticResource FormLabel}" />
+                    <ComboBox x:Name="CmbInterestType" Style="{StaticResource AppComboBox}"
+                              Margin="0,0,0,12">
+                        <ComboBoxItem Content="Simple" IsSelected="True" />
+                        <ComboBoxItem Content="Compounded" />
+                    </ComboBox>
+
+                    <!-- Payout Frequency -->
+                    <TextBlock Text="Честота на изплащане" Style="{StaticResource FormLabel}" />
+                    <ComboBox x:Name="CmbPayoutFrequency" Style="{StaticResource AppComboBox}"
+                              Margin="0,0,0,12">
+                        <ComboBoxItem Content="AtMaturity" IsSelected="True" />
+                        <ComboBoxItem Content="Monthly" />
+                    </ComboBox>
+
+                    <!-- Tax Rate -->
+                    <TextBlock Text="Данък върху лихвата (%)" Style="{StaticResource FormLabel}" />
+                    <TextBox x:Name="TxtTaxRate" Style="{StaticResource AppTextBox}" Text="8" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,24">
+                <Button x:Name="BtnSave" Content="Запази"
+                        Style="{StaticResource SuccessButton}"
+                        Click="BtnSave_Click"
+                        Margin="0,0,12,0" />
+                <Button x:Name="BtnCancel" Content="Отказ"
+                        Style="{StaticResource PrimaryButton}"
+                        Click="BtnCancel_Click" />
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,249 @@
+:root {
+    /* LIGHT MODE (Deep Sea Glass) */
+    --bg-base: #e0f0f5; /* Light sea breeze */
+    --bg-gradient: linear-gradient(135deg, #e0f0f5 0%, #b8e0d2 100%);
+    --bg-glass: rgba(255, 255, 255, 0.6);
+    --bg-glass-hover: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 100, 120, 0.1);
+    
+    --accent-cyan: #008080; /* Teal for light mode contrast */
+    --accent-orange: #e65100; /* Deep orange */
+    
+    --text-primary: #082026;
+    --text-muted: #4a6c73;
+    
+    --navbar-bg: rgba(255, 255, 255, 0.75);
+    --card-bg: var(--bg-glass);
+}
+
+[data-theme="dark"] {
+    /* DARK MODE (Deep Sea Glass) */
+    --bg-base: #061114; /* Deep ocean dark */
+    --bg-gradient: linear-gradient(135deg, #061114 0%, #0b1f24 100%);
+    --bg-glass: rgba(11, 31, 36, 0.5);
+    --bg-glass-hover: rgba(11, 31, 36, 0.75);
+    --glass-border: rgba(0, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    
+    --accent-cyan: #00e5ff; /* Electric Aqua */
+    --accent-orange: #ff6b35; /* Tangerine */
+    
+    --text-primary: #e0f2f5;
+    --text-muted: #7ca2a8;
+    
+    --navbar-bg: rgba(6, 17, 20, 0.8);
+    --card-bg: var(--bg-glass);
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--bg-base);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ══════════════ Navbar ══════════════ */
+.navbar {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: var(--glass-shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-primary) !important;
+    opacity: 0.8;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    opacity: 1;
+    color: var(--accent-cyan) !important;
+}
+
+/* ══════════════ Layout ══════════════ */
+.main-content {
+    flex: 1 0 auto;
+    padding-top: 90px;
+    padding-bottom: 4rem;
+}
+
+.site-footer {
+    flex-shrink: 0;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--glass-border);
+    padding: 2rem 0;
+    color: var(--text-muted);
+}
+
+/* ══════════════ Typography ══════════════ */
+.text-accent {
+    color: var(--accent-cyan) !important;
+}
+.text-warning, .text-danger {
+    color: var(--accent-orange) !important;
+}
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* ══════════════ Buttons ══════════════ */
+.btn-accent {
+    background-color: var(--accent-cyan);
+    color: #000; /* Contrast against cyan */
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .btn-accent {
+    color: #fff;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-orange);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+.btn-outline-primary:hover {
+    background-color: var(--accent-cyan);
+    color: #000;
+}
+
+/* ══════════════ Hero Section ══════════════ */
+.hero-section {
+    color: var(--text-primary);
+    padding: 60px 0 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+    line-height: 1.6;
+}
+
+/* ══════════════ Glass Cards (Frutiger Aero flavor) ══════════════ */
+.card, .feature-card, .bg-light {
+    background-color: var(--card-bg) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--glass-shadow) !important;
+    color: var(--text-primary) !important;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-header, .card-footer {
+    background-color: rgba(0,0,0,0.1) !important;
+    border-color: var(--glass-border) !important;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, #00b4d8 100%) !important;
+    color: #000 !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #2b9348 0%, #007f5f 100%) !important;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    height: 100%;
+}
+
+.feature-card:hover, .product-card:hover {
+    transform: translateY(-5px);
+    background-color: var(--bg-glass-hover) !important;
+    box-shadow: 0 12px 40px rgba(0, 229, 255, 0.15) !important;
+    border-color: rgba(0, 229, 255, 0.4) !important;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+/* ══════════════ Tables & Forms ══════════════ */
+.table {
+    color: var(--text-primary) !important;
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(0, 229, 255, 0.05);
+}
+
+.table-light, .table th, .table td {
+    background-color: transparent !important;
+    border-color: var(--glass-border) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    backdrop-filter: blur(4px);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 0.25rem rgba(0, 229, 255, 0.25);
+    color: var(--text-primary);
+}
+
+.form-control option,
+.form-select option {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-primary) !important;
+}

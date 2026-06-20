@@ -1,0 +1,112 @@
+<Window x:Class="BankingApp.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BankingApp — Управление на банкови продукти"
+        Width="1200" Height="750"
+        MinWidth="900" MinHeight="550"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource PrimaryDarkBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource PrimarySurfaceBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+            <DockPanel>
+                <!-- App branding -->
+                <StackPanel DockPanel.Dock="Top" Margin="20,24,20,28">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE825;" FontSize="32" Margin="0,0,0,8" Foreground="{StaticResource AccentBlueBrush}" />
+                    <TextBlock Text="BankingApp"
+                               FontSize="20" FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontFamily="{StaticResource AppFont}" />
+                    <TextBlock Text="Управление на продукти"
+                               FontSize="11"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontFamily="{StaticResource AppFont}"
+                               Margin="0,2,0,0" />
+                </StackPanel>
+
+                <!-- Separator -->
+                <Border DockPanel.Dock="Top" Height="1"
+                        Background="{StaticResource BorderBrush}"
+                        Margin="16,0,16,12" />
+
+                <!-- Navigation -->
+                <StackPanel DockPanel.Dock="Top" Margin="8,0">
+                    <TextBlock Text="НАВИГАЦИЯ"
+                               FontSize="10" FontWeight="Bold"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               Margin="12,0,0,8" />
+
+                    <Button x:Name="BtnAllProducts" Style="{StaticResource SidebarButton}" Click="BtnAllProducts_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8FD;" Margin="0,0,12,0" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Text="Всички продукти" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnDeposits" Style="{StaticResource SidebarButton}" Click="BtnDeposits_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xF540;" Margin="0,0,12,0" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Text="Депозити" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnLoans" Style="{StaticResource SidebarButton}" Click="BtnLoans_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE80F;" Margin="0,0,12,0" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Text="Кредити" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnCards" Style="{StaticResource SidebarButton}" Click="BtnCards_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8C7;" Margin="0,0,12,0" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Text="Кредитни карти" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Border Height="1" Background="{StaticResource BorderBrush}"
+                            Margin="4,16,4,12" />
+
+                    <TextBlock Text="ДЕЙСТВИЯ"
+                               FontSize="10" FontWeight="Bold"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               Margin="12,0,0,8" />
+
+                    <Button x:Name="BtnAddProduct" Style="{StaticResource SidebarButton}" Click="BtnAddProduct_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" Margin="0,0,12,0" VerticalAlignment="Center" FontSize="16"/>
+                            <TextBlock Text="Добави продукт" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Bottom info -->
+                <StackPanel DockPanel.Dock="Bottom" Margin="16,0,16,16"
+                            VerticalAlignment="Bottom">
+                    <Border Height="1" Background="{StaticResource BorderBrush}"
+                            Margin="0,0,0,12" />
+                    <TextBlock Text="CITB613 — НБУ"
+                               FontSize="10"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               HorizontalAlignment="Center" />
+                    <TextBlock x:Name="TxtProductCount"
+                               Text="0 продукта в базата"
+                               FontSize="10"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               HorizontalAlignment="Center"
+                               Margin="0,4,0,0" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="1" Padding="24">
+            <ContentControl x:Name="MainContent" />
+        </Border>
+    </Grid>
+</Window>
