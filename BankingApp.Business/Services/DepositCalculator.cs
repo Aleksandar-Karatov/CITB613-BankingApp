@@ -27,6 +27,7 @@ namespace BankingApp.Business.Services
             decimal runningBalance = principal;
             decimal totalGrossInterest = 0;
             decimal totalTax = 0;
+            decimal cumulativePayout = 0;
 
             // Interest calculation depends on Type and Payout frequency
             bool isCompounded = string.Equals(product.InterestType, "Compounded", StringComparison.OrdinalIgnoreCase);
@@ -56,31 +57,19 @@ namespace BankingApp.Business.Services
 
                 if (isMonthlyPayout)
                 {
-                    // Paid out monthly, so running balance does not increase
-                    // End balance remains startBalance (which is principal if simple, or updated base if compounded but payout changes it. 
-                    // Usually compounding with monthly payout is simple interest since it's not capitalized.)
-                    if (isCompounded)
-                    {
-                        // Capitalized but paid out? It behaves like simple interest because it's not added to principal.
-                        runningBalance = startBalance;
-                    }
-                    else
-                    {
-                        runningBalance = principal;
-                    }
+                    // Paid out monthly — interest is withdrawn, balance stays at principal
+                    cumulativePayout += netInterest;
+                    runningBalance = principal;
                 }
                 else
                 {
-                    // Capitalized or paid at maturity. 
+                    // Capitalized or paid at maturity — net interest added to balance
                     if (isCompounded)
                     {
-                        // Compounded adds interest to the principal each month (capitalized net interest)
                         runningBalance += netInterest;
                     }
                     else
                     {
-                        // Simple interest paid at maturity: we accumulate the interest but don't compound it.
-                        // End balance in schedule represents the running balance plus accrued net interest
                         runningBalance += netInterest;
                     }
                 }
@@ -95,7 +84,10 @@ namespace BankingApp.Business.Services
                     InterestEarned = Math.Round(interestEarned, 2),
                     TaxDeducted = Math.Round(taxDeducted, 2),
                     NetInterest = Math.Round(netInterest, 2),
-                    EndBalance = Math.Round(runningBalance, 2)
+                    EndBalance = isMonthlyPayout 
+                        ? Math.Round(principal + cumulativePayout, 2) 
+                        : Math.Round(runningBalance, 2),
+                    CumulativePayout = Math.Round(cumulativePayout, 2)
                 });
             }
 

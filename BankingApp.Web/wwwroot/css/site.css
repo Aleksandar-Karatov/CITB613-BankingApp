@@ -237,8 +237,13 @@ body {
     color: var(--text-primary);
 }
 
-[data-theme="dark"] .form-control option,
-[data-theme="dark"] .form-select option {
+.form-control option,
+.form-select option {
     background-color: var(--bg-base);
     color: var(--text-primary);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-primary) !important;
 }
