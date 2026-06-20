@@ -35,3 +35,9 @@
 **/*.sln.docstates
 **/*.sw?
 **/*.zip
+*/BankingApp.Business/obj/*
+*/BankingApp.Business/bin/*
+*/BankingApp.Desktop/obj/*
+*/BankingApp.Desktop/bin/*
+*/BankingApp.Web/obj/*
+*/BankingApp.Web/bin/*
