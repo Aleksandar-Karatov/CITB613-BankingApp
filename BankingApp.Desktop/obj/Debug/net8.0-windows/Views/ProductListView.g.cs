@@ -115,7 +115,7 @@ namespace BankingApp.Desktop.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BankingApp.Desktop;V1.0.0.0;component/views/productlistview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BankingApp.Desktop;component/views/productlistview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\ProductListView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

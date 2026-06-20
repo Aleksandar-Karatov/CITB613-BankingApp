@@ -10,3 +10,4 @@ F:\NBU\CITB613 Практика по бизнес информационни с�
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Business\obj\Debug\net8.0\refint\BankingApp.Business.dll
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Business\obj\Debug\net8.0\BankingApp.Business.pdb
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Business\obj\Debug\net8.0\ref\BankingApp.Business.dll
+F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Business\obj\Debug\net8.0\BankingApp.Business.sourcelink.json

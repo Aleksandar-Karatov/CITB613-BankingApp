@@ -60,3 +60,4 @@ F:\NBU\CITB613 Практика по бизнес информационни с�
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Web\obj\Debug\net8.0\BankingApp.Web.pdb
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Web\obj\Debug\net8.0\BankingApp.Web.genruntimeconfig.cache
 F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Web\obj\Debug\net8.0\ref\BankingApp.Web.dll
+F:\NBU\CITB613 Практика по бизнес информационни системи\BankingApp\BankingApp.Web\obj\Debug\net8.0\BankingApp.Web.sourcelink.json

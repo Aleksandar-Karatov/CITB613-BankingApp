@@ -26,5 +26,6 @@ namespace BankingApp.Business.Models
         public decimal TaxDeducted { get; set; }
         public decimal NetInterest { get; set; }
         public decimal EndBalance { get; set; }
+        public decimal CumulativePayout { get; set; }
     }
 }
