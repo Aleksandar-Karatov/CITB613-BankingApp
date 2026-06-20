@@ -48,3 +48,5 @@ Then open your browser to the address shown in the console (usually `http://loca
 ---
 
 *Developed according to the specifications of the group project assignment.*
+
+ ### Developed by Aleksandar Zahariev Karatov, F115376 for the course CITB613: Business Information Systems Practicum (New Bulgarian University).
