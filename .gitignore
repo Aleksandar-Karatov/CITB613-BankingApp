@@ -1,43 +1,24 @@
-*.dll
-*.exe
-*.bin
-*.obj
-*.deps.json
-*.runtimeconfig.json
-*.pdb
-*.user
-*.userosscache
-*.vspscc
-*.suo
-*.ntvs*
-*.njsproj
-*.sln.docstates
-*.sw?
-*.log
-*.txt
+# Build output
 **/bin/
 **/obj/
-**/bin
-**/obj
-**/*.user
-**/*.userosscache
-**/*.vspscc
-**/*.suo
-**/*.ntvs*
-**/*.njsproj
-**/*.sln.docstates
-**/*.sw?
-**/*.log
-**/*.txt
-**/*.suo
-**/*.ntvs*
-**/*.njsproj
-**/*.sln.docstates
-**/*.sw?
-**/*.zip
-*/BankingApp.Business/obj/*
-*/BankingApp.Business/bin/*
-*/BankingApp.Desktop/obj/*
-*/BankingApp.Desktop/bin/*
-*/BankingApp.Web/obj/*
-*/BankingApp.Web/bin/*
+
+# .NET artifacts
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+
+# Visual Studio
+*.user
+*.userosscache
+*.suo
+*.vspscc
+*.sln.docstates
+
+# Swap files
+*.sw?
+
+# Logs and archives
+*.log
+*.zip
