@@ -247,3 +247,40 @@ body {
     background-color: rgba(255, 255, 255, 0.05) !important;
     color: var(--text-primary) !important;
 }
+
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .card-footer.bg-white {
+    background-color: var(--bg-glass) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .table-bordered,
+[data-theme="dark"] .table-bordered th,
+[data-theme="dark"] .table-bordered td {
+    border-color: var(--glass-border) !important;
+}
+
+[data-theme="dark"] .list-group-item {
+    background-color: transparent;
+    border-color: var(--glass-border);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .input-group-text {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--glass-border);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .badge.bg-light {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .bg-light.rounded {
+    border: none !important;
+}
+
+.table-borderless th,
+.table-borderless td {
+    border: none !important;
+}
