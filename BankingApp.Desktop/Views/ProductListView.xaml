@@ -1,0 +1,77 @@
+<UserControl x:Class="BankingApp.Desktop.Views.ProductListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <!-- Header and Buttons -->
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+                <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
+                    <TextBlock x:Name="TxtTitle" Text="Всички продукти"
+                               Style="{StaticResource SectionTitle}" />
+                    <TextBlock x:Name="TxtSubtitle" Text=""
+                               FontSize="12"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               FontFamily="{StaticResource AppFont}"
+                               Margin="0,-12,0,0" />
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
+                            HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button x:Name="BtnAdd" Style="{StaticResource SuccessButton}" Click="BtnAdd_Click" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Добави" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BtnEdit" Style="{StaticResource PrimaryButton}" Click="BtnEdit_Click" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Редактирай" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BtnDelete" Style="{StaticResource DangerButton}" Click="BtnDelete_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Изтрий" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Search Bar -->
+            <Border DockPanel.Dock="Top" Background="{StaticResource PrimarySurfaceBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="6" Padding="12">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Търсене по име / банка:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,8,0" FontWeight="SemiBold"/>
+                    <TextBox x:Name="TxtSearchKeyword" Width="250" Style="{StaticResource AppTextBox}" TextChanged="SearchFilter_Changed" />
+                    
+                    <TextBlock Text="Валута:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="24,0,8,0" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="CmbSearchCurrency" Width="120" Style="{StaticResource AppComboBox}" SelectionChanged="SearchFilter_Changed">
+                        <ComboBoxItem Content="Всички" IsSelected="True"/>
+                        <ComboBoxItem Content="EUR"/>
+                        <ComboBoxItem Content="USD"/>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+
+        <DataGrid x:Name="ProductGrid"
+                  Style="{StaticResource AppDataGrid}"
+                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                  CellStyle="{StaticResource DataGridCellStyle}"
+                  RowStyle="{StaticResource DataGridRowStyle}"
+                  MouseDoubleClick="ProductGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Име" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Банка" Binding="{Binding BankName}" Width="180" />
+                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="100" />
+                <DataGridTextColumn Header="Валута" Binding="{Binding Currency}" Width="70" />
+                <DataGridTextColumn Header="Лихва (%)" Binding="{Binding InterestRate, StringFormat=N2}" Width="85" />
+                <DataGridTextColumn Header="Срок (мес.)" Binding="{Binding TermMonths}" Width="85" />
+                <DataGridTextColumn Header="Мин. сума" Binding="{Binding MinAmount, StringFormat=N0}" Width="90" />
+                <DataGridTextColumn Header="Макс. сума" Binding="{Binding MaxAmount, StringFormat=N0}" Width="95" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

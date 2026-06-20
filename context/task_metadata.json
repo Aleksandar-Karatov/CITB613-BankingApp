@@ -1,0 +1,125 @@
+{
+  "files_in_context": [
+    {
+      "path": "BankingApp.sln",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781813975614,
+      "cline_edit_date": 1781813975614,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/BankingApp.Business.csproj",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814095250,
+      "cline_edit_date": 1781814095250,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Web/BankingApp.Web.csproj",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814103657,
+      "cline_edit_date": 1781814103657,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Desktop/BankingApp.Desktop.csproj",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814158669,
+      "cline_edit_date": 1781814158669,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/Models/BankProduct.cs",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814171388,
+      "cline_edit_date": 1781814171388,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/Data/BankingDbContext.cs",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814182172,
+      "cline_edit_date": 1781814182172,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/Models/DepositCalculationResult.cs",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814193002,
+      "cline_edit_date": 1781814193002,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/Services/DepositCalculator.cs",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814211896,
+      "cline_edit_date": 1781814211896,
+      "user_edit_date": null
+    },
+    {
+      "path": "BankingApp.Business/Data/DbInitializer.cs",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1781814269602,
+      "cline_edit_date": 1781814269602,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1781813084080,
+      "model_id": "gemini-3.1-pro-preview",
+      "model_provider_id": "gemini",
+      "mode": "act"
+    },
+    {
+      "ts": 1781813171036,
+      "model_id": "gemini-3.1-pro-preview",
+      "model_provider_id": "gemini",
+      "mode": "plan"
+    },
+    {
+      "ts": 1781813286604,
+      "model_id": "gemini-3.5-flash",
+      "model_provider_id": "gemini",
+      "mode": "plan"
+    },
+    {
+      "ts": 1781813450433,
+      "model_id": "gemini-3.1-pro-preview",
+      "model_provider_id": "gemini",
+      "mode": "plan"
+    },
+    {
+      "ts": 1781813722298,
+      "model_id": "gemini-3.5-flash",
+      "model_provider_id": "gemini",
+      "mode": "plan"
+    },
+    {
+      "ts": 1781813758192,
+      "model_id": "gemini-3.5-flash",
+      "model_provider_id": "gemini",
+      "mode": "act"
+    }
+  ],
+  "environment_history": [
+    {
+      "ts": 1781813084073,
+      "os_name": "win32",
+      "os_version": "10.0.26100",
+      "os_arch": "x64",
+      "host_name": "Visual Studio Code",
+      "host_version": "1.109.2",
+      "cline_version": "3.89.2"
+    }
+  ]
+}

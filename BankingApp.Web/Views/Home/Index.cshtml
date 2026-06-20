@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Начало";
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Сравнете банкови <span class="text-accent">депозити</span></h1>
+            <p class="hero-subtitle">
+                Намерете най-добрите лихвени проценти от водещите банки в България.
+                Изчислете доходността и прегледайте разплащателни планове.
+            </p>
+            <div class="hero-actions">
+                <a asp-controller="Catalog" asp-action="Index" class="btn btn-accent btn-lg">
+                    <i class="bi bi-journal-text me-2"></i>Разгледай каталога
+                </a>
+                <a asp-controller="Catalog" asp-action="Search" class="btn btn-outline-light btn-lg ms-3">
+                    <i class="bi bi-search me-2"></i>Разширено търсене
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon text-accent"><i class="bi bi-cash-stack"></i></div>
+                    <h3>Каталог на депозити</h3>
+                    <p>Прегледайте актуалните оферти от водещите банки в България с детайлна информация за всеки продукт.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon text-accent"><i class="bi bi-bar-chart-fill"></i></div>
+                    <h3>Калкулатор</h3>
+                    <p>Изчислете очакваната доходност, данъци и нетна печалба с нашия вграден депозитен калкулатор.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon text-accent"><i class="bi bi-calendar3"></i></div>
+                    <h3>Разплащателен план</h3>
+                    <p>Вижте подробен месечен график на лихвени начисления, данъци и крайно салдо.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
