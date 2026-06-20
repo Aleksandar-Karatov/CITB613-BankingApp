@@ -1,0 +1,87 @@
+@model BankingApp.Business.Models.BankProduct
+
+@{
+    ViewData["Title"] = "Детайли - " + Model.Name;
+}
+
+<div class="container mt-5 pt-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" class="text-decoration-none">Каталог</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Детайли</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-lg border-0 mb-5 overflow-hidden">
+        <div class="bg-primary text-white p-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge bg-light text-primary mb-2">@Model.BankName</span>
+                    <h1 class="h2 mb-0">@Model.Name</h1>
+                </div>
+                <div class="text-end">
+                    <div class="fs-1 fw-bold text-warning">@Model.InterestRate.ToString("0.00")%</div>
+                    <div class="small text-white-50">Лихвен процент</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <h5 class="text-accent mb-3">Описание на продукта</h5>
+            <p class="lead text-muted mb-5">
+                @Model.Description
+            </p>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 bg-light rounded text-center h-100">
+                        <div class="text-muted small fw-bold text-uppercase mb-1">Валута</div>
+                        <div class="fs-4 fw-bold">@Model.Currency</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 bg-light rounded text-center h-100">
+                        <div class="text-muted small fw-bold text-uppercase mb-1">Срок</div>
+                        <div class="fs-4 fw-bold">@Model.TermMonths месеца</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 bg-light rounded text-center h-100">
+                        <div class="text-muted small fw-bold text-uppercase mb-1">Мин. сума</div>
+                        <div class="fs-5 fw-bold">@Model.MinAmount.ToString("N2")</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-3 bg-light rounded text-center h-100">
+                        <div class="text-muted small fw-bold text-uppercase mb-1">Макс. сума</div>
+                        <div class="fs-5 fw-bold">@Model.MaxAmount.ToString("N2")</div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="text-accent mb-3">Технически параметри</h5>
+            <table class="table table-bordered mb-0">
+                <tbody>
+                    <tr>
+                        <th class="w-25 bg-light text-muted">Тип на лихвата</th>
+                        <td>@(Model.InterestType == "Simple" ? "Проста лихва (включва се в главницата еднократно или се изплаща)" : "Сложна / Капитализирана лихва (натрупва се върху главницата)")</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Честота на изплащане</th>
+                        <td>@(Model.PayoutFrequency == "AtMaturity" ? "На падеж (в края на периода)" : "Ежемесечно")</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Данък върху лихвата</th>
+                        <td>@Model.TaxRate.ToString("0.0")% (удържа се автоматично при изплащане)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card-footer bg-light p-4 text-center">
+            <a asp-action="Calculate" asp-route-id="@Model.Id" class="btn btn-accent btn-lg px-5">
+                <i class="bi bi-calculator me-2"></i>Изчисли доходност за този депозит
+            </a>
+        </div>
+    </div>
+</div>

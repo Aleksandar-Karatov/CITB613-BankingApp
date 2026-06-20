@@ -1,0 +1,110 @@
+@model IEnumerable<BankingApp.Business.Models.BankProduct>
+
+@{
+    ViewData["Title"] = "Разширено търсене";
+}
+
+<div class="container mt-5 pt-4">
+    <h2 class="mb-4"><i class="bi bi-search text-accent me-2"></i>Разширено търсене на депозити</h2>
+
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-body p-4 bg-light rounded">
+            <form method="get" asp-action="Search">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Валута</label>
+                        <select name="currency" class="form-select">
+                            <option value="">-- Всички --</option>
+                            <option value="EUR" selected="@(ViewBag.Currency == "EUR")">EUR</option>
+                            <option value="USD" selected="@(ViewBag.Currency == "USD")">USD</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Сума над</label>
+                        <input type="number" name="minAmount" class="form-control" value="@ViewBag.MinAmount" placeholder="Напр. 1000" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Сума до</label>
+                        <input type="number" name="maxAmount" class="form-control" value="@ViewBag.MaxAmount" placeholder="Напр. 50000" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Тип лихва</label>
+                        <select name="interestType" class="form-select">
+                            <option value="">-- Всички --</option>
+                            <option value="Simple" selected="@(ViewBag.InterestType == "Simple")">Проста лихва</option>
+                            <option value="Compounded" selected="@(ViewBag.InterestType == "Compounded")">Сложна (Капитализирана)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Мин. срок (месеци)</label>
+                        <input type="number" name="minTerm" class="form-control" value="@ViewBag.MinTerm" placeholder="Напр. 6" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Макс. срок (месеци)</label>
+                        <input type="number" name="maxTerm" class="form-control" value="@ViewBag.MaxTerm" placeholder="Напр. 24" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-bold">Изплащане на лихва</label>
+                        <select name="payoutFrequency" class="form-select">
+                            <option value="">-- Всички --</option>
+                            <option value="AtMaturity" selected="@(ViewBag.PayoutFrequency == "AtMaturity")">На падеж</option>
+                            <option value="Monthly" selected="@(ViewBag.PayoutFrequency == "Monthly")">Месечно</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-accent w-100">Търси</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (ViewBag.HasSearched != null && ViewBag.HasSearched)
+    {
+        <h4 class="mb-3">Резултати (@Model.Count())</h4>
+        
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning">
+                Не са намерени депозити, отговарящи на вашите критерии. Опитайте да промените филтрите.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Продукт</th>
+                            <th>Банка</th>
+                            <th>Валута</th>
+                            <th>Лихва</th>
+                            <th>Срок</th>
+                            <th>Изплащане</th>
+                            <th>Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model)
+                        {
+                            <tr>
+                                <td><a asp-action="Details" asp-route-id="@p.Id" class="text-decoration-none fw-bold text-accent">@p.Name</a></td>
+                                <td>@p.BankName</td>
+                                <td><span class="badge bg-secondary">@p.Currency</span></td>
+                                <td class="text-success fw-bold">@p.InterestRate.ToString("0.00")%</td>
+                                <td>@p.TermMonths мес.</td>
+                                <td>@(p.PayoutFrequency == "AtMaturity" ? "На падеж" : "Месечно")</td>
+                                <td>
+                                    <a asp-action="Calculate" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary">Изчисли</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</div>
