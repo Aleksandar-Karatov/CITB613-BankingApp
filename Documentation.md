@@ -1,8 +1,8 @@
 # COURSEWORK
 **Course:** CITB613: Business Information Systems Practice  
 **University:** New Bulgarian University  
-**Student:** [Your Name and Surname]  
-**Faculty Number:** [Your F.N.]  
+**Student:** Aleksandar Zahariev Karatov
+**Faculty Number:** F115376 
 
 ---
 
@@ -74,44 +74,61 @@ The application features a custom and unified design system across both modules.
 * **Components:** The interface relies on standard modern web components such as navigation bars, interactive cards for product display, and styled input forms for search and data entry.
 * **Consistency:** The WPF desktop application is styled with the same color palette and control designs to ensure a consistent user experience across the entire system.
 
-## 6. Project File Structure, Code Logic, and UI Composition
-This section provides a deep dive into how the code is structured, how the UI is composed, and where the core logic resides across the different modules.
+## 6. Detailed File-by-File Explanation
 
-### 6.1. BankingApp.Business (Core Logic & Data)
-This library is the backbone of the application. It contains the models and the mathematical logic, ensuring that both the Web and Desktop apps use the exact same rules.
+This section provides an exhaustive, file-by-file breakdown of the core logic, models, views, and configuration files across all three projects in the solution.
 
-* **Models/BankProduct.cs:** This C# class represents the blueprint of a banking product. It contains properties with data types corresponding to the database columns (e.g., `decimal InterestRate`, `int TermMonths`).
-* **Data/BankingDbContext.cs:** This class inherits from `DbContext` (Entity Framework Core). It acts as the bridge between the C# code and the SQLite database. It contains `DbSet<BankProduct> BankProducts`, which allows developers to query the database using standard C# LINQ instead of writing raw SQL queries.
-* **Services/DepositCalculator.cs:** This is where the core financial mathematics are hardcoded. 
-  * **Functionality:** It receives an investment amount, term, interest rate, and payout frequency.
-  * **Logic:** It uses a `for` loop to calculate the accrued interest for each period. It applies the standard formula `(Amount * InterestRate / 100)`, calculates the mandatory 10% state tax (`tax = grossInterest * 0.10m`), and stores the result in a list of `DepositCalculationResult` objects. This guarantees that the amortization schedule is calculated consistently.
+### 6.1. BankingApp.Business (Core Logic, Data & Models)
+This class library acts as the foundation of the architecture. It contains no UI, only data definitions and mathematical algorithms.
 
-### 6.2. BankingApp.Desktop (WPF UI Composition & Logic)
-The Desktop app uses the Windows Presentation Foundation (WPF) framework. The UI is composed using a separation of markup and logic: the visual layout is written in **XAML** (`.xaml`), while the logic is written in "Code-Behind" C# files (`.xaml.cs`).
+* **`Models/BankProduct.cs`** 
+  The primary data model (Entity) representing a banking product. It contains properties mapped to database columns (e.g., `Name`, `Currency`, `InterestRate`, `TermMonths`). It uses Data Annotations like `[Required]` and `[MaxLength]` for database schema generation and form validation.
+* **`Models/DepositCalculationResult.cs`**
+  A Data Transfer Object (DTO) used by the calculator. It holds the final results of a deposit calculation: the gross interest, tax amount, net interest, effective annual rate (ЕГЛ), and a `List<DepositScheduleLine>` containing the month-by-month amortization schedule.
+* **`Data/BankingDbContext.cs`**
+  The Entity Framework Core database context. It inherits from `DbContext` and defines the `DbSet<BankProduct> BankProducts` collection. It configures the SQLite connection, ensuring the database file (`banking.db`) is created in the user's `%LOCALAPPDATA%` folder so it can be shared between the Web and Desktop apps.
+* **`Data/DbInitializer.cs`**
+  A utility class containing a `Seed()` method. When the application starts for the first time, this file checks if the database is empty. If it is, it automatically populates the `BankProducts` table with predefined sample deposits (e.g., DSK, Postbank, UBB deposits) so the system is immediately usable.
+* **`Services/DepositCalculator.cs`**
+  A static utility class containing the core financial mathematics (`CalculateDepositYield`). It takes a `BankProduct` and a principal amount, runs a `for` loop over the deposit's term, and applies logic for simple vs. compounded interest, as well as monthly vs. maturity payout frequencies. It returns a fully populated `DepositCalculationResult`.
 
-* **UI Composition (MainWindow.xaml):** 
-  * The main window is composed of a static sidebar (DockPanel) and a dynamic central area (`<ContentControl x:Name="MainContent" />`). 
-  * Instead of opening multiple pop-up windows, the application acts as a Single Page Application (SPA). When the user clicks a button in the sidebar, `MainWindow.xaml.cs` swaps the content of `MainContent` with either the `ProductListView` or the `ProductFormView`.
-* **Views/ProductListView.xaml & .xaml.cs:** 
-  * **UI:** Contains a `DataGrid` to display products in a table, and a Search Bar composed of TextBoxes and ComboBoxes.
-  * **C# Logic:** In the code-behind, the `LoadProducts()` method connects directly to the `BankingDbContext` to fetch all products and binds them to the `DataGrid`. 
-  * **Search Logic:** The `SearchFilter_Changed` event handler captures keystrokes. It uses LINQ (`.Where(p => p.Name.Contains(keyword))`) to instantly filter the list of products in the computer's RAM (in-memory) without querying the database again, ensuring zero lag.
-* **Views/ProductFormView.xaml & .xaml.cs:** 
-  * **UI:** A data entry form built with `TextBox` and `ComboBox` controls.
-  * **C# Logic:** The `BtnSave_Click` method contains all the validation and database logic. It reads the text from the UI fields, safely parses them into numbers using `decimal.TryParse()`, and validates the business rules (e.g., ensuring the Minimum Amount is not greater than the Maximum Amount). If validation passes, it creates a new `BankProduct` object, adds it to the `BankingDbContext`, and calls `context.SaveChanges()` to write it to the SQLite database.
+### 6.2. BankingApp.Desktop (WPF Administration Interface)
+This project is the internal tool for bank employees, built with Windows Presentation Foundation (WPF) and XAML.
 
-### 6.3. BankingApp.Web (ASP.NET Core UI Composition & Logic)
-The Web app follows the **MVC (Model-View-Controller)** architectural pattern. The logic is handled by Controllers, and the UI is rendered by Razor Views.
+* **`App.xaml` & `App.xaml.cs`**
+  The entry point of the desktop application. `App.xaml` defines global application resources, primarily linking to the custom `Theme.xaml`. `App.xaml.cs` handles application startup events, specifically invoking the `DbInitializer.Seed()` method to ensure the database is ready before the UI loads.
+* **`Styles/Theme.xaml`**
+  A global Resource Dictionary containing all CSS-like styling for the WPF application. It defines the color palette (SolidColorBrushes), custom `ControlTemplates`, and styles for components like `AppButton`, `AppTextBox`, and `DataGridCellStyle`. This file completely removes the default grey Windows styling, replacing it with a modern, dark-themed UI.
+* **`MainWindow.xaml` & `MainWindow.xaml.cs`**
+  The main shell of the application. It features a static left sidebar (using Segoe MDL2 Assets for icons) and a dynamic central `ContentControl`. The Code-Behind (`.xaml.cs`) handles navigation, swapping the central content between the `ProductListView` and the `ProductFormView` without opening new windows (acting as a desktop Single Page Application).
+* **`Views/ProductListView.xaml` & `.xaml.cs`**
+  The dashboard view. The XAML defines a customized `DataGrid` displaying all products, along with search textboxes and dropdowns. The Code-Behind connects to the `BankingDbContext`, fetches products via `.ToList()`, binds them to the grid, and implements real-time, in-memory LINQ filtering when the user types in the search bar. It also contains the logic for the "Edit" and "Delete" buttons inside the grid rows.
+* **`Views/ProductFormView.xaml` & `.xaml.cs`**
+  The data entry form. The XAML defines input fields (`TextBox`) and dropdowns (`ComboBox`) for product properties. The Code-Behind handles the `BtnSave_Click` event: it validates user input (e.g., ensuring text parses correctly to decimals), updates or creates a `BankProduct` entity, and calls `context.SaveChanges()` to persist the data to the SQLite database.
 
-* **Controllers/CatalogController.cs:** 
-  * **Purpose:** This file acts as the "traffic cop" for the web portal. 
-  * **Logic:** When a user visits the Search page, the `Search()` method is triggered. It accepts HTTP GET parameters (like `minAmount`, `currency`). It opens a connection to `BankingDbContext`, queries the database, and uses LINQ to filter out deposits that do not match the user's criteria. Finally, it passes the filtered `List<BankProduct>` to the View.
-* **UI Composition (Razor Views - .cshtml):**
-  * **Shared/_Layout.cshtml:** This is the master wrapper template. It contains the HTML `<head>`, the navigation bar, and the footer. Inside it is a `@RenderBody()` command, which injects the specific page content.
-  * **Catalog/Index.cshtml & Search.cshtml:** These files mix HTML with C# code (Razor syntax). They use a `@foreach (var item in Model)` loop to dynamically generate a Bootstrap "Card" component for every single banking product passed from the Controller.
-  * **Catalog/Calculate.cshtml:** This view contains the form where users input their investment amount. When submitted, the Controller passes the data to the `DepositCalculator.cs` service, and the View dynamically generates an HTML `<table>` rendering the exact month-by-month amortization plan.
-* **wwwroot/css/site.css & js/site.js:** 
-  * Contains the static assets. `site.css` defines the custom Deep Sea Glass theme variables (colors, padding, frosted glass effects). `site.js` contains the JavaScript logic that listens for the Dark/Light mode button click, swaps a `data-theme` attribute on the HTML tag, and saves the user's preference in the browser's `localStorage`.
+### 6.3. BankingApp.Web (ASP.NET Core Public Portal)
+This project is the public-facing website for clients, built with the Model-View-Controller (MVC) pattern.
+
+* **`Program.cs`**
+  The startup configuration file for the ASP.NET Core web server. It configures dependency injection, enables MVC routing (`MapControllerRoute`), and serves static files from `wwwroot`. It also calls `DbInitializer.Seed()` on startup.
+* **`Controllers/HomeController.cs`**
+  Handles routing for the static landing page (`Index.cshtml`).
+* **`Controllers/CatalogController.cs`**
+  The main controller handling the business logic for the public portal. It contains actions like `Index()` (loads all products), `Details(int id)` (loads a specific product), `Search()` (filters products based on GET parameters using LINQ), and `Calculate(int id, decimal amount)` (invokes the `DepositCalculator` service and passes the schedule to the view).
+* **`Views/Shared/_Layout.cshtml`**
+  The master HTML wrapper. It contains the `<head>`, CSS links, the Bootstrap navigation bar, the Dark/Light mode toggle button, and the `@RenderBody()` directive where specific page views are injected.
+* **`Views/Home/Index.cshtml`**
+  The landing page view containing the hero section and marketing copy.
+* **`Views/Catalog/Index.cshtml` & `Search.cshtml`**
+  These Razor views use a `@foreach` loop to iterate over the `List<BankProduct>` provided by the Controller, rendering an interactive Bootstrap Card component for each deposit in the catalog.
+* **`Views/Catalog/Details.cshtml`**
+  A detailed view page displaying the full specifications (Term, Limits, Tax Rate, Interest Type) of a single selected product.
+* **`Views/Catalog/Calculate.cshtml`**
+  Contains an input form for the investment amount. Once calculated, it dynamically renders an HTML `<table>` iterating over the `DepositCalculationResult.Schedule`, displaying the month-by-month balance, earned interest, and deducted taxes.
+* **`wwwroot/css/site.css`**
+  The custom stylesheet. It defines CSS variables for the "Deep Sea Glass" theme, handles the `.bg-glass` aesthetics (backdrop-filter blurs, borders), and contains media queries and `[data-theme="dark"]` overrides to handle dynamic light/dark mode switching seamlessly.
+* **`wwwroot/js/site.js`**
+  Contains the client-side JavaScript logic. Primarily, it handles the theme toggler button, checking the user's OS preference, switching the HTML `data-theme` attribute, and saving the preference in the browser's `localStorage`.
 
 ## 7. Conclusion
 The "BankingApp" project demonstrates the integration of various technologies from the .NET ecosystem. The shared library architecture allows for easy future upgrades (such as adding user profiles or migrating to a different database like SQL Server or PostgreSQL). The application is stable and fully functional.
