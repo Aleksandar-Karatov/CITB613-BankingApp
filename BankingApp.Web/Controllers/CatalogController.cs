@@ -79,7 +79,7 @@ namespace BankingApp.Web.Controllers
             return View(results);
         }
 
-        //  GET /Catalog/Details/5 — Product Details
+        //  GET /Catalog/Details/{id} — Product Details
         public IActionResult Details(int id)
         {
             var product = _context.BankProducts.Find(id);
@@ -89,7 +89,7 @@ namespace BankingApp.Web.Controllers
             return View(product);
         }
 
-        //  GET /Catalog/Calculate/5 — Calculator Page
+        //  GET /Catalog/Calculate/{id} — Calculator Page
         public IActionResult Calculate(int id)
         {
             var product = _context.BankProducts.Find(id);
@@ -103,7 +103,7 @@ namespace BankingApp.Web.Controllers
             return View();
         }
 
-        //  POST /Catalog/Calculate/5 — Run Calculation
+        //  POST /Catalog/Calculate/{id} — Run Calculation
         [HttpPost]
         public IActionResult Calculate(int id, decimal amount)
         {

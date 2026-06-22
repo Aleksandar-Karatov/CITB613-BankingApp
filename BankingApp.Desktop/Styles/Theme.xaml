@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Color Palette (Deep Sea Glass)                     -->
+    <!-- Color Palette (Deep Sea Glass) -->
     <Color x:Key="PrimaryDark">#061114</Color>
     <Color x:Key="PrimarySurface">#0B1F24</Color>
     <Color x:Key="PrimaryMedium">#11313A</Color>
@@ -30,10 +30,10 @@
     <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource InputBackground}" />
     <SolidColorBrush x:Key="RowAlternateBrush" Color="{StaticResource RowAlternate}" />
 
-    <!-- Typography                                         -->
+    <!-- Typography -->
     <FontFamily x:Key="AppFont">Helvetica, Arial, Segoe UI</FontFamily>
 
-    <!-- Button Style                                       -->
+    <!-- Button Style -->
     <Style x:Key="PrimaryButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentBlueBrush}" />
         <Setter Property="Foreground" Value="White" />
@@ -154,7 +154,7 @@
         </Setter>
     </Style>
 
-    <!-- TextBox Style                                      -->
+    <!-- TextBox Style -->
     <Style x:Key="AppTextBox" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
@@ -184,7 +184,7 @@
         </Setter>
     </Style>
 
-    <!-- ComboBox Style                                     -->
+    <!-- ComboBox Style -->
     <Style x:Key="AppComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
@@ -266,7 +266,7 @@
         </Setter>
     </Style>
 
-    <!-- Label Style                                        -->
+    <!-- Label Style -->
     <Style x:Key="FormLabel" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
         <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
@@ -283,7 +283,7 @@
         <Setter Property="Margin" Value="0,0,0,16" />
     </Style>
 
-    <!-- DataGrid Style                                     -->
+    <!-- DataGrid Style -->
     <Style x:Key="AppDataGrid" TargetType="DataGrid">
         <Setter Property="Background" Value="{StaticResource PrimarySurfaceBrush}" />
         <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />

@@ -64,14 +64,7 @@ namespace BankingApp.Business.Services
                 else
                 {
                     // Capitalized or paid at maturity — net interest added to balance
-                    if (isCompounded)
-                    {
-                        runningBalance += netInterest;
-                    }
-                    else
-                    {
-                        runningBalance += netInterest;
-                    }
+                    runningBalance += netInterest;
                 }
 
                 totalGrossInterest += interestEarned;
